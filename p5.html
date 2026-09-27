@@ -1,0 +1,2807 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>RPG Preview</title>
+
+
+<style>
+
+/* =========================================================
+   RPG PREVIEW
+   VISUAL: SCI-FI / NOIR / RETRO FUTURISTA
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   VARIÁVEIS DE CORES
+--------------------------------------------------------- */
+
+:root {
+
+    --background: #0b0d0e;
+    --panel: #111516;
+    --panel-light: #171b1d;
+
+    --yellow: #d8ad42;
+    --yellow-light: #f1cc68;
+
+    --red: #a63d3d;
+    --red-light: #d45555;
+
+    --green: #78a66a;
+
+    --text: #dddddd;
+    --muted: #777777;
+
+    --border: #34383a;
+
+}
+
+
+/* ---------------------------------------------------------
+   RESET
+--------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #171b1c 0%,
+            #090b0c 70%
+        );
+
+    color: var(--text);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    min-height: 100vh;
+
+}
+
+
+/* ---------------------------------------------------------
+   LINHAS DE SCAN
+--------------------------------------------------------- */
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.015),
+            rgba(255,255,255,0.015) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    z-index: 999;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+
+    border-bottom:
+        1px solid var(--yellow);
+
+    background:
+        linear-gradient(
+            90deg,
+            #090b0c,
+            #191c1d,
+            #090b0c
+        );
+
+    padding: 18px 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.logo {
+
+    color: var(--yellow);
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+}
+
+
+.subtitle {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-top: 5px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ---------------------------------------------------------
+   SYSTEM STATUS
+--------------------------------------------------------- */
+
+.system {
+
+    text-align: right;
+
+    font-size: 11px;
+
+}
+
+
+.system-online {
+
+    color: var(--green);
+
+}
+
+
+.system span {
+
+    display: block;
+
+    margin: 3px 0;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container {
+
+    width: 94%;
+
+    max-width: 1250px;
+
+    margin: 25px auto;
+
+}
+
+
+/* =========================================================
+   TOOLBAR PRINCIPAL
+========================================================= */
+
+.main-toolbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.toolbar-left {
+
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.control-button {
+
+    position: relative;
+
+    background: #171a1b;
+
+    color: var(--yellow);
+
+    border: 1px solid #4a432e;
+
+    padding: 11px 18px;
+
+    font-family: monospace;
+
+    cursor: pointer;
+
+    transition:
+        0.2s;
+
+    letter-spacing: 1px;
+
+}
+
+
+.control-button:hover {
+
+    background: var(--yellow);
+
+    color: #111;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 0 15px
+        rgba(216,173,66,0.25);
+
+}
+
+
+/* =========================================================
+   PAINÉIS
+========================================================= */
+
+.panel {
+
+    background:
+        linear-gradient(
+            145deg,
+            #15191a,
+            #0e1112
+        );
+
+    border:
+        1px solid var(--border);
+
+    margin-bottom: 20px;
+
+    padding: 20px;
+
+    position: relative;
+
+}
+
+
+/* Linha decorativa */
+
+.panel::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    width: 45px;
+
+    height: 2px;
+
+    background:
+        var(--yellow);
+
+}
+
+
+.panel-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+}
+
+
+.panel-title h2 {
+
+    margin: 0;
+
+    color: var(--yellow);
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.panel-code {
+
+    color: #555;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   PERSONAGEM
+========================================================= */
+
+.character-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        2fr 1.5fr 0.8fr 1.2fr 1.5fr;
+
+    gap: 12px;
+
+}
+
+
+.field {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.field label {
+
+    color:
+        var(--muted);
+
+    font-size:
+        10px;
+
+    margin-bottom:
+        6px;
+
+    letter-spacing:
+        1px;
+
+}
+
+
+.field input {
+
+    background:
+        #090b0c;
+
+    border:
+        1px solid #34383a;
+
+    color:
+        var(--text);
+
+    padding:
+        11px;
+
+    font-family:
+        monospace;
+
+    outline:
+        none;
+
+}
+
+
+.field input:focus {
+
+    border-color:
+        var(--yellow);
+
+    box-shadow:
+        0 0 8px
+        rgba(216,173,66,0.15);
+
+}
+
+
+/* =========================================================
+   BOUNTY
+========================================================= */
+
+.bounty {
+
+    border:
+        1px solid var(--red);
+
+    padding:
+        15px;
+
+    margin-top:
+        15px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    background:
+        rgba(100,20,20,0.08);
+
+}
+
+
+.bounty-label {
+
+    color:
+        var(--red-light);
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.bounty input {
+
+    background:
+        transparent;
+
+    border:
+        none;
+
+    color:
+        var(--red-light);
+
+    font-size:
+        22px;
+
+    font-family:
+        monospace;
+
+    text-align:
+        right;
+
+    outline:
+        none;
+
+}
+
+
+/* =========================================================
+   ATRIBUTOS
+========================================================= */
+
+.attributes {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(6,1fr);
+
+    gap:
+        10px;
+
+}
+
+
+.attribute {
+
+    background:
+        #0a0c0d;
+
+    border:
+        1px solid #303537;
+
+    padding:
+        15px;
+
+    text-align:
+        center;
+
+    transition:
+        0.25s;
+
+}
+
+
+/* MOUSEOVER */
+
+.attribute:hover {
+
+    border-color:
+        var(--yellow);
+
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 18px
+        rgba(216,173,66,0.12);
+
+}
+
+
+.attribute strong {
+
+    display:
+        block;
+
+    color:
+        var(--yellow);
+
+    font-size:
+        12px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.attribute input {
+
+    width:
+        65px;
+
+    background:
+        #16191a;
+
+    border:
+        1px solid #444;
+
+    color:
+        white;
+
+    padding:
+        8px;
+
+    text-align:
+        center;
+
+    font-family:
+        monospace;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        20px;
+
+}
+
+
+.status {
+
+    background:
+        #0a0c0d;
+
+    padding:
+        15px;
+
+    border:
+        1px solid #303537;
+
+}
+
+
+.status-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.status-name {
+
+    color:
+        var(--yellow);
+
+}
+
+
+.status-number {
+
+    color:
+        #aaa;
+
+}
+
+
+.bar {
+
+    height:
+        14px;
+
+    background:
+        #25292a;
+
+    overflow:
+        hidden;
+
+}
+
+
+.bar-fill {
+
+    height:
+        100%;
+
+    width:
+        70%;
+
+    transition:
+        width 0.4s;
+
+}
+
+
+.health {
+
+    background:
+        var(--red);
+
+}
+
+
+.mana {
+
+    background:
+        #486d91;
+
+}
+
+
+/* =========================================================
+   EDITOR
+========================================================= */
+
+.editor-toolbar {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        5px;
+
+    padding:
+        8px;
+
+    background:
+        #090b0c;
+
+    border:
+        1px solid #303537;
+
+}
+
+
+.editor-toolbar button,
+.editor-toolbar select {
+
+    background:
+        #191d1e;
+
+    color:
+        #ccc;
+
+    border:
+        1px solid #34383a;
+
+    padding:
+        7px 10px;
+
+    font-family:
+        monospace;
+
+    cursor:
+        pointer;
+
+}
+
+
+.editor-toolbar button:hover {
+
+    background:
+        var(--yellow);
+
+    color:
+        #111;
+
+}
+
+
+.editor {
+
+    min-height:
+        250px;
+
+    background:
+        #0b0d0e;
+
+    border:
+        1px solid #303537;
+
+    border-top:
+        none;
+
+    padding:
+        20px;
+
+    outline:
+        none;
+
+    line-height:
+        1.7;
+
+}
+
+
+.editor:focus {
+
+    border-color:
+        var(--yellow);
+
+}
+
+
+.editor:empty::before {
+
+    content:
+        attr(data-placeholder);
+
+    color:
+        #555;
+
+}
+
+
+/* =========================================================
+   BOTÕES FINAIS
+========================================================= */
+
+.bottom-actions {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+
+.big-button {
+
+    flex:
+        1;
+
+    min-width:
+        180px;
+
+    padding:
+        15px;
+
+    border:
+        1px solid;
+
+    background:
+        #111;
+
+    color:
+        var(--yellow);
+
+    font-family:
+        monospace;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.25s;
+
+}
+
+
+.big-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 0 20px
+        rgba(216,173,66,0.15);
+
+}
+
+
+.save {
+
+    border-color:
+        var(--green);
+
+    color:
+        var(--green);
+
+}
+
+
+.import {
+
+    border-color:
+        #557fa5;
+
+    color:
+        #7ca9d4;
+
+}
+
+
+.export {
+
+    border-color:
+        var(--yellow);
+
+}
+
+
+.clear {
+
+    border-color:
+        var(--red);
+
+    color:
+        var(--red-light);
+
+}
+
+
+/* =========================================================
+   OVERLAY DE CARREGAMENTO
+========================================================= */
+
+.loading-overlay {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    background:
+        rgba(5,7,8,0.94);
+
+    display:
+        none;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    z-index:
+        2000;
+
+}
+
+
+.loading-box {
+
+    width:
+        420px;
+
+    max-width:
+        90%;
+
+    background:
+        #111516;
+
+    border:
+        1px solid var(--yellow);
+
+    padding:
+        30px;
+
+    box-shadow:
+        0 0 40px
+        rgba(216,173,66,0.15);
+
+}
+
+
+.loading-title {
+
+    color:
+        var(--yellow);
+
+    letter-spacing:
+        3px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.loading-message {
+
+    color:
+        #999;
+
+    font-size:
+        12px;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.loading-bar {
+
+    height:
+        12px;
+
+    background:
+        #292d2e;
+
+    overflow:
+        hidden;
+
+}
+
+
+.loading-progress {
+
+    height:
+        100%;
+
+    width:
+        0%;
+
+    background:
+        var(--yellow);
+
+    transition:
+        width 0.1s linear;
+
+}
+
+
+.loading-percent {
+
+    margin-top:
+        8px;
+
+    color:
+        var(--yellow);
+
+    text-align:
+        right;
+
+    font-size:
+        12px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media(max-width:900px) {
+
+    .character-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+    .attributes {
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    header {
+
+        flex-direction:
+            column;
+
+        gap:
+            15px;
+
+        text-align:
+            center;
+
+    }
+
+    .system {
+
+        text-align:
+            center;
+
+    }
+
+    .character-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .attributes {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+    .status-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header>
+
+    <div>
+
+        <div class="logo">
+            RPG PREVIEW
+        </div>
+
+        <div class="subtitle">
+            CHARACTER DATABASE // RPG SYSTEM
+        </div>
+
+    </div>
+
+
+    <div class="system">
+
+        <span class="system-online">
+            ● SYSTEM ONLINE
+        </span>
+
+        <span>
+            DATABASE: READY
+        </span>
+
+        <span>
+            FILE SYSTEM: READY
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     CONTROLES
+====================================================== -->
+
+<div class="main-toolbar">
+
+    <div class="toolbar-left">
+
+        <button
+            class="control-button"
+            onclick="novoPersonagem()">
+
+            NEW CHARACTER
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     IDENTIDADE
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <h2>
+            CHARACTER DATABASE
+        </h2>
+
+        <span class="panel-code">
+            DB-01
+        </span>
+
+    </div>
+
+
+    <div class="character-grid">
+
+
+        <div class="field">
+
+            <label>
+                NAME
+            </label>
+
+            <input
+                id="nome"
+                type="text"
+                placeholder="Character name">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                CLASS
+            </label>
+
+            <input
+                id="classe"
+                type="text"
+                placeholder="Bounty Hunter">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                LEVEL
+            </label>
+
+            <input
+                id="nivel"
+                type="number"
+                value="1">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                RACE
+            </label>
+
+            <input
+                id="raca"
+                type="text"
+                placeholder="Human">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                ID
+            </label>
+
+            <input
+                id="identidade"
+                type="text"
+                placeholder="XXXX-000">
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="bounty">
+
+        <span class="bounty-label">
+            ★ BOUNTY
+        </span>
+
+        <input
+            id="bounty"
+            type="number"
+
+            value="0">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     ATRIBUTOS
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <h2>
+            ATTRIBUTES
+        </h2>
+
+        <span class="panel-code">
+            STAT-02
+        </span>
+
+    </div>
+
+
+    <div class="attributes">
+
+
+        <div class="attribute">
+
+            <strong>
+                STR
+            </strong>
+
+            <input
+                id="forca"
+                type="number"
+                value="10">
+
+        </div>
+
+
+        <div class="attribute">
+
+            <strong>
+                DEX
+            </strong>
+
+            <input
+                id="destreza"
+                type="number"
+                value="10">
+
+        </div>
+
+
+        <div class="attribute">
+
+            <strong>
+                INT
+            </strong>
+
+            <input
+                id="inteligencia"
+                type="number"
+                value="10">
+
+        </div>
+
+
+        <div class="attribute">
+
+            <strong>
+                CON
+            </strong>
+
+            <input
+                id="constituicao"
+                type="number"
+                value="10">
+
+        </div>
+
+
+        <div class="attribute">
+
+            <strong>
+                PER
+            </strong>
+
+            <input
+                id="percepcao"
+                type="number"
+                value="10">
+
+        </div>
+
+
+        <div class="attribute">
+
+            <strong>
+                CHA
+            </strong>
+
+            <input
+                id="carisma"
+                type="number"
+                value="10">
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATUS
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <h2>
+            VITAL STATUS
+        </h2>
+
+        <span class="panel-code">
+            LIFE-03
+        </span>
+
+    </div>
+
+
+    <div class="status-grid">
+
+
+        <div class="status">
+
+            <div class="status-header">
+
+                <span class="status-name">
+                    HP / LIFE
+                </span>
+
+                <span class="status-number">
+
+                    <input
+                        id="vidaAtual"
+                        type="number"
+                        value="70"
+                        style="width:55px">
+
+                    /
+
+                    <input
+                        id="vidaMax"
+                        type="number"
+                        value="100"
+                        style="width:55px">
+
+                </span>
+
+            </div>
+
+
+            <div class="bar">
+
+                <div
+                    id="vidaBarra"
+                    class="bar-fill health">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="status">
+
+            <div class="status-header">
+
+                <span class="status-name">
+                    ENERGY
+                </span>
+
+                <span class="status-number">
+
+                    <input
+                        id="manaAtual"
+                        type="number"
+                        value="50"
+                        style="width:55px">
+
+                    /
+
+                    <input
+                        id="manaMax"
+                        type="number"
+                        value="100"
+                        style="width:55px">
+
+                </span>
+
+            </div>
+
+
+            <div class="bar">
+
+                <div
+                    id="manaBarra"
+                    class="bar-fill mana">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HISTÓRIA
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <h2>
+            PERSONAL RECORD
+        </h2>
+
+        <span class="panel-code">
+            DATA-04
+        </span>
+
+    </div>
+
+
+    <div class="editor-toolbar">
+
+
+        <button
+            onclick="formatar('bold')">
+
+            B
+
+        </button>
+
+
+        <button
+            onclick="formatar('italic')">
+
+            I
+
+        </button>
+
+
+        <button
+            onclick="formatar('underline')">
+
+            U
+
+        </button>
+
+
+        <button
+            onclick="formatar('justifyLeft')">
+
+            ←
+
+        </button>
+
+
+        <button
+            onclick="formatar('justifyCenter')">
+
+            ↔
+
+        </button>
+
+
+        <button
+            onclick="formatar('justifyRight')">
+
+            →
+
+        </button>
+
+
+        <button
+            onclick="formatar('insertUnorderedList')">
+
+            • LIST
+
+        </button>
+
+
+        <button
+            onclick="formatar('undo')">
+
+            ↶
+
+        </button>
+
+
+        <button
+            onclick="formatar('redo')">
+
+            ↷
+
+        </button>
+
+
+        <select
+            onchange="alterarTamanho(this.value)">
+
+            <option value="">
+                SIZE
+            </option>
+
+            <option value="2">
+                SMALL
+            </option>
+
+            <option value="3">
+                NORMAL
+            </option>
+
+            <option value="5">
+                LARGE
+            </option>
+
+            <option value="7">
+                HUGE
+            </option>
+
+        </select>
+
+
+    </div>
+
+
+    <div
+        id="historia"
+        class="editor"
+        contenteditable="true"
+        data-placeholder="ENTER CHARACTER HISTORY...">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     HABILIDADES
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <h2>
+            SKILLS / ABILITIES
+        </h2>
+
+        <span class="panel-code">
+            SKILL-05
+        </span>
+
+    </div>
+
+
+    <div class="editor-toolbar">
+
+
+        <button onclick="formatar('bold')">
+            B
+        </button>
+
+
+        <button onclick="formatar('italic')">
+            I
+        </button>
+
+
+        <button onclick="formatar('underline')">
+            U
+        </button>
+
+
+        <button
+            onclick="formatar('insertUnorderedList')">
+
+            • LIST
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        id="habilidades"
+        class="editor"
+        contenteditable="true"
+        data-placeholder="ENTER CHARACTER SKILLS...">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     INVENTÁRIO
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <h2>
+            INVENTORY
+        </h2>
+
+        <span class="panel-code">
+            ITEM-06
+        </span>
+
+    </div>
+
+
+    <div class="editor-toolbar">
+
+
+        <button onclick="formatar('bold')">
+            B
+        </button>
+
+
+        <button onclick="formatar('italic')">
+            I
+        </button>
+
+
+        <button
+            onclick="formatar('insertUnorderedList')">
+
+            • LIST
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        id="inventario"
+        class="editor"
+        contenteditable="true"
+        data-placeholder="ENTER INVENTORY...">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     AÇÕES
+====================================================== -->
+
+<section class="panel">
+
+
+    <div class="panel-title">
+
+        <h2>
+            FILE SYSTEM
+        </h2>
+
+        <span class="panel-code">
+            SYS-07
+        </span>
+
+    </div>
+
+
+    <div class="bottom-actions">
+
+
+        <button
+            class="big-button save"
+            onclick="salvarFicha()">
+
+            SAVE LOCAL
+
+        </button>
+
+
+        <button
+            class="big-button import"
+            onclick="abrirImportacao()">
+
+            IMPORT CHARACTER
+
+        </button>
+
+
+        <button
+            class="big-button export"
+            onclick="exportarFicha()">
+
+            EXPORT CHARACTER
+
+        </button>
+
+
+        <button
+            class="big-button clear"
+            onclick="limparFicha()">
+
+            CLEAR
+
+        </button>
+
+
+    </div>
+
+
+    <!-- Campo invisível para escolher arquivo -->
+
+    <input
+        type="file"
+        id="arquivoImportacao"
+        accept=".rpg,.json"
+        style="display:none"
+        onchange="processarImportacao(event)">
+
+
+</section>
+
+
+
+</div>
+
+
+
+<!-- =====================================================
+     LOADING SCREEN
+====================================================== -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay">
+
+
+    <div class="loading-box">
+
+
+        <div
+            id="loadingTitle"
+            class="loading-title">
+
+            SYSTEM PROCESS
+
+        </div>
+
+
+        <div
+            id="loadingMessage"
+            class="loading-message">
+
+            INITIALIZING...
+
+        </div>
+
+
+        <div class="loading-bar">
+
+            <div
+                id="loadingProgress"
+                class="loading-progress">
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="loadingPercent"
+            class="loading-percent">
+
+            0%
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   RPG PREVIEW
+   JAVASCRIPT
+========================================================= */
+
+
+/* =========================================================
+   EDITOR
+========================================================= */
+
+function formatar(comando) {
+
+    document.execCommand(
+        comando,
+        false,
+        null
+    );
+
+}
+
+
+function alterarTamanho(tamanho) {
+
+    if (tamanho !== "") {
+
+        document.execCommand(
+            "fontSize",
+            false,
+            tamanho
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BARRAS DE STATUS
+========================================================= */
+
+function atualizarVida() {
+
+    let atual =
+        Number(
+            document.getElementById("vidaAtual").value
+        );
+
+    let max =
+        Number(
+            document.getElementById("vidaMax").value
+        );
+
+
+    if (max <= 0) {
+
+        max = 1;
+
+    }
+
+
+    let porcentagem =
+        (atual / max) * 100;
+
+
+    porcentagem =
+        Math.max(
+            0,
+            Math.min(100, porcentagem)
+        );
+
+
+    document.getElementById(
+        "vidaBarra"
+    ).style.width =
+        porcentagem + "%";
+
+}
+
+
+function atualizarMana() {
+
+    let atual =
+        Number(
+            document.getElementById("manaAtual").value
+        );
+
+    let max =
+        Number(
+            document.getElementById("manaMax").value
+        );
+
+
+    if (max <= 0) {
+
+        max = 1;
+
+    }
+
+
+    let porcentagem =
+        (atual / max) * 100;
+
+
+    porcentagem =
+        Math.max(
+            0,
+            Math.min(100, porcentagem)
+        );
+
+
+    document.getElementById(
+        "manaBarra"
+    ).style.width =
+        porcentagem + "%";
+
+}
+
+
+document
+    .getElementById("vidaAtual")
+    .addEventListener(
+        "input",
+        atualizarVida
+    );
+
+
+document
+    .getElementById("vidaMax")
+    .addEventListener(
+        "input",
+        atualizarVida
+    );
+
+
+document
+    .getElementById("manaAtual")
+    .addEventListener(
+        "input",
+        atualizarMana
+
+    );
+
+
+document
+    .getElementById("manaMax")
+    .addEventListener(
+        "input",
+        atualizarMana
+    );
+
+
+/* =========================================================
+   COLETAR DADOS DA FICHA
+========================================================= */
+
+function coletarFicha() {
+
+    return {
+
+        nome:
+            document.getElementById("nome").value,
+
+        classe:
+            document.getElementById("classe").value,
+
+        nivel:
+            document.getElementById("nivel").value,
+
+        raca:
+            document.getElementById("raca").value,
+
+        identidade:
+            document.getElementById("identidade").value,
+
+        bounty:
+            document.getElementById("bounty").value,
+
+
+        forca:
+            document.getElementById("forca").value,
+
+        destreza:
+            document.getElementById("destreza").value,
+
+        inteligencia:
+            document.getElementById("inteligencia").value,
+
+        constituicao:
+            document.getElementById("constituicao").value,
+
+        percepcao:
+            document.getElementById("percepcao").value,
+
+        carisma:
+            document.getElementById("carisma").value,
+
+
+        vidaAtual:
+            document.getElementById("vidaAtual").value,
+
+        vidaMax:
+            document.getElementById("vidaMax").value,
+
+        manaAtual:
+            document.getElementById("manaAtual").value,
+
+        manaMax:
+            document.getElementById("manaMax").value,
+
+
+        historia:
+            document.getElementById("historia").innerHTML,
+
+        habilidades:
+            document.getElementById("habilidades").innerHTML,
+
+        inventario:
+            document.getElementById("inventario").innerHTML
+
+    };
+
+}
+
+
+/* =========================================================
+   LOADING SYSTEM
+========================================================= */
+
+function iniciarCarregamento(
+    titulo,
+    mensagem,
+    duracao,
+    callback
+) {
+
+    const overlay =
+        document.getElementById(
+            "loadingOverlay"
+        );
+
+
+    const progress =
+        document.getElementById(
+            "loadingProgress"
+        );
+
+
+    const percent =
+        document.getElementById(
+            "loadingPercent"
+        );
+
+
+    const title =
+        document.getElementById(
+            "loadingTitle"
+        );
+
+
+    const message =
+        document.getElementById(
+            "loadingMessage"
+        );
+
+
+    title.textContent =
+        titulo;
+
+
+    message.textContent =
+        mensagem;
+
+
+    progress.style.width =
+        "0%";
+
+
+    percent.textContent =
+        "0%";
+
+
+    overlay.style.display =
+        "flex";
+
+
+    let inicio =
+        Date.now();
+
+
+    let intervalo =
+        setInterval(function() {
+
+
+            let passado =
+                Date.now() - inicio;
+
+
+            let porcentagem =
+                Math.min(
+                    100,
+                    Math.round(
+                        (passado / duracao) * 100
+                    )
+                );
+
+
+            progress.style.width =
+                porcentagem + "%";
+
+
+            percent.textContent =
+                porcentagem + "%";
+
+
+            if (porcentagem >= 100) {
+
+                clearInterval(intervalo);
+
+
+                setTimeout(function() {
+
+                    overlay.style.display =
+                        "none";
+
+
+                    if (callback) {
+
+                        callback();
+
+                    }
+
+                }, 250);
+
+            }
+
+
+        }, 40);
+
+}
+
+
+/* =========================================================
+   SAVE LOCAL
+========================================================= */
+
+function salvarFicha() {
+
+    let ficha =
+        coletarFicha();
+
+
+    localStorage.setItem(
+        "RPGPreviewFicha",
+        JSON.stringify(ficha)
+    );
+
+
+    iniciarCarregamento(
+
+        "LOCAL DATABASE",
+
+        "SAVING CHARACTER DATA...",
+
+        900,
+
+        function() {
+
+            atualizarStatus(
+                "CHARACTER: SAVED"
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   EXPORTAR
+========================================================= */
+
+function exportarFicha() {
+
+    let ficha =
+        coletarFicha();
+
+
+    iniciarCarregamento(
+
+        "DATA TRANSFER",
+
+        "PACKING CHARACTER DATA...",
+
+        1400,
+
+        function() {
+
+
+            let dados =
+                JSON.stringify(
+                    ficha,
+                    null,
+                    4
+                );
+
+
+            let arquivo =
+                new Blob(
+                    [dados],
+                    {
+                        type:
+                            "application/json"
+                    }
+                );
+
+
+            let url =
+                URL.createObjectURL(
+                    arquivo
+                );
+
+
+            let nome =
+                ficha.nome
+                ?
+                ficha.nome.replace(
+                    /[^a-z0-9]/gi,
+                    "_"
+                )
+                :
+                "Character";
+
+
+            let link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                url;
+
+
+            link.download =
+                "RPG_Preview_" +
+                nome +
+                ".rpg";
+
+
+            link.click();
+
+
+            URL.revokeObjectURL(
+                url
+            );
+
+
+            atualizarStatus(
+                "FILE: EXPORTED"
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   IMPORTAR
+========================================================= */
+
+function abrirImportacao() {
+
+    document
+        .getElementById(
+            "arquivoImportacao"
+        )
+        .click();
+
+}
+
+
+function processarImportacao(event) {
+
+    let arquivo =
+        event.target.files[0];
+
+
+    if (!arquivo) {
+
+        return;
+
+    }
+
+
+    iniciarCarregamento(
+
+        "CHARACTER DATABASE",
+
+        "READING CHARACTER FILE...",
+
+        1400,
+
+        function() {
+
+            let leitor =
+                new FileReader();
+
+
+            leitor.onload =
+                function(e) {
+
+                    try {
+
+                        let ficha =
+                            JSON.parse(
+                                e.target.result
+                            );
+
+
+                        preencherFicha(
+                            ficha
+                        );
+
+
+                        atualizarStatus(
+                            "CHARACTER: LOADED"
+                        );
+
+
+                    }
+                    catch (erro) {
+
+                        alert(
+                            "Arquivo de ficha inválido."
+                        );
+
+                    }
+
+                };
+
+
+            leitor.readAsText(
+                arquivo
+            );
+
+        }
+
+    );
+
+
+    event.target.value = "";
+
+}
+
+
+/* =========================================================
+   PREENCHER FICHA
+========================================================= */
+
+function preencherFicha(ficha) {
+
+    document.getElementById("nome").value =
+        ficha.nome || "";
+
+
+    document.getElementById("classe").value =
+        ficha.classe || "";
+
+
+    document.getElementById("nivel").value =
+        ficha.nivel || 1;
+
+
+    document.getElementById("raca").value =
+        ficha.raca || "";
+
+
+    document.getElementById("identidade").value =
+        ficha.identidade || "";
+
+
+    document.getElementById("bounty").value =
+        ficha.bounty || 0;
+
+
+    document.getElementById("forca").value =
+        ficha.forca || 10;
+
+
+    document.getElementById("destreza").value =
+        ficha.destreza || 10;
+
+
+    document.getElementById("inteligencia").value =
+        ficha.inteligencia || 10;
+
+
+    document.getElementById("constituicao").value =
+        ficha.constituicao || 10;
+
+
+    document.getElementById("percepcao").value =
+        ficha.percepcao || 10;
+
+
+    document.getElementById("carisma").value =
+        ficha.carisma || 10;
+
+
+    document.getElementById("vidaAtual").value =
+        ficha.vidaAtual || 70;
+
+
+    document.getElementById("vidaMax").value =
+        ficha.vidaMax || 100;
+
+
+    document.getElementById("manaAtual").value =
+        ficha.manaAtual || 50;
+
+
+    document.getElementById("manaMax").value =
+        ficha.manaMax || 100;
+
+
+    document.getElementById("historia").innerHTML =
+        ficha.historia || "";
+
+
+    document.getElementById("habilidades").innerHTML =
+        ficha.habilidades || "";
+
+
+    document.getElementById("inventario").innerHTML =
+        ficha.inventario || "";
+
+
+    atualizarVida();
+
+    atualizarMana();
+
+}
+
+
+/* =========================================================
+   CARREGAR DO LOCALSTORAGE
+========================================================= */
+
+function carregarLocal() {
+
+    let dados =
+        localStorage.getItem(
+            "RPGPreviewFicha"
+        );
+
+
+    if (!dados) {
+
+        atualizarVida();
+
+        atualizarMana();
+
+        return;
+
+    }
+
+
+    try {
+
+        let ficha =
+            JSON.parse(dados);
+
+
+        preencherFicha(
+            ficha
+        );
+
+
+        atualizarStatus(
+            "LOCAL CHARACTER LOADED"
+        );
+
+
+    }
+    catch (erro) {
+
+        console.log(
+            "Não foi possível carregar a ficha."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NOVO PERSONAGEM
+========================================================= */
+
+function novoPersonagem() {
+
+    let confirmar =
+        confirm(
+            "Criar um novo personagem? Os dados atuais não serão preservados."
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    document
+        .querySelectorAll(
+            "input"
+        )
+        .forEach(function(input) {
+
+            if (
+                input.type === "number"
+            ) {
+
+                input.value =
+                    input.id.includes("Atual")
+                    ?
+                    50
+                    :
+                    10;
+
+            }
+            else {
+
+                input.value = "";
+
+            }
+
+        });
+
+
+    document.getElementById(
+        "nivel"
+    ).value = 1;
+
+
+    document.getElementById(
+        "vidaAtual"
+    ).value = 70;
+
+
+    document.getElementById(
+        "vidaMax"
+    ).value = 100;
+
+
+    document.getElementById(
+        "manaAtual"
+    ).value = 50;
+
+
+    document.getElementById(
+        "manaMax"
+    ).value = 100;
+
+
+    document.getElementById(
+        "historia"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+        "habilidades"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+        "inventario"
+    ).innerHTML = "";
+
+
+    atualizarVida();
+
+    atualizarMana();
+
+
+    atualizarStatus(
+        "NEW CHARACTER"
+    );
+
+}
+
+
+/* =========================================================
+   LIMPAR
+========================================================= */
+
+function limparFicha() {
+
+    let confirmar =
+        confirm(
+            "CLEAR CHARACTER DATA?"
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "RPGPreviewFicha"
+    );
+
+
+    iniciarCarregamento(
+
+        "SYSTEM RESET",
+
+        "CLEARING CHARACTER DATA...",
+
+        800,
+
+        function() {
+
+            location.reload();
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   STATUS DO SISTEMA
+========================================================= */
+
+function atualizarStatus(mensagem) {
+
+    let elemento =
+        document.querySelector(
+            ".system-online"
+        );
+
+
+    elemento.textContent =
+        "● " + mensagem;
+
+}
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+carregarLocal();
+
+atualizarVida();
+
+atualizarMana();
+
+</script>
+
+
+</body>
+
+</html>
+```

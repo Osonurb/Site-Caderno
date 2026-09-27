@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Primeiro Projeto</title>
+
+    <!-- =========================
+         CSS → APARÊNCIA
+         ========================= -->
+    <style>
+
+        body {
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #1e3a8a
+            );
+        }
+
+        .cartao {
+            width: 320px;
+            padding: 35px;
+
+            text-align: center;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.4);
+
+            transition: transform 0.3s ease;
+        }
+
+        .cartao:hover {
+            transform: translateY(-10px);
+        }
+
+        .icone {
+            font-size: 60px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+
+            color: #111827;
+        }
+
+        p {
+            color: #6b7280;
+
+            line-height: 1.6;
+        }
+
+        #mensagem {
+            margin-top: 20px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         HTML → ESTRUTURA
+         ========================= -->
+
+    <div class="cartao" id="cartao">
+
+        <div class="icone">
+            💻
+        </div>
+
+        <h1>Meu Primeiro Projeto</h1>
+
+        <p>
+            <strong>Este cartão foi criado usando:</strong> <br>
+            <em>.HTML<br> .CSS<br> .JavaScript.</em>
+        </p>
+
+        <div id="mensagem">
+            Passe o mouse aqui 👆
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT → COMPORTAMENTO
+         ========================= -->
+
+    <script>
+
+        const cartao =
+            document.getElementById("cartao");
+
+        const mensagem =
+            document.getElementById("mensagem");
+
+
+        cartao.addEventListener("mouseover", function() {
+
+            mensagem.textContent =
+                "Você passou o mouse! 🚀";
+
+        });
+
+
+        cartao.addEventListener("mouseout", function() {
+
+            mensagem.textContent =
+                "Passe o mouse aqui 👆";
+
+        });
+
+    </script>
+
+</body>
+</html>

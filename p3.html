@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Desenho com JavaScript</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #222;
+        }
+
+        canvas {
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ÁREA ONDE O DESENHO SERÁ FEITO -->
+    <canvas id="meuDesenho"
+            width="800"
+            height="500">
+    </canvas>
+
+
+    <script>
+
+        // ============================
+        // 1. PEGAR O CANVAS
+        // ============================
+
+        const canvas =
+            document.getElementById("meuDesenho");
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        // ============================
+        // 2. CÉU
+        // ============================
+
+        ctx.fillStyle = "#87CEEB";
+
+        ctx.fillRect(
+            0,      // posição X
+            0,      // posição Y
+            800,    // largura
+            500     // altura
+        );
+
+
+        // ============================
+        // 3. SOL
+        // ============================
+
+        ctx.fillStyle = "#FFD700";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            650,    // X
+            100,    // Y
+            50,     // raio
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+
+        // ============================
+        // 4. MONTANHA
+        // ============================
+
+        ctx.fillStyle = "#555";
+
+        ctx.beginPath();
+
+        ctx.moveTo(0, 350);
+
+        ctx.lineTo(200, 150);
+
+        ctx.lineTo(400, 350);
+
+        ctx.lineTo(600, 180);
+
+        ctx.lineTo(800, 350);
+
+        ctx.lineTo(800, 500);
+
+        ctx.lineTo(0, 500);
+
+        ctx.closePath();
+
+        ctx.fill();
+
+
+        // ============================
+        // 5. CHÃO
+        // ============================
+
+        ctx.fillStyle = "#4CAF50";
+
+        ctx.fillRect(
+            0,
+            350,
+            800,
+            150
+        );
+
+
+        // ============================
+        // 6. TRONCO DA ÁRVORE
+        // ============================
+
+        ctx.fillStyle = "#8B4513";
+
+        ctx.fillRect(
+            150,
+            250,
+            50,
+            150
+        );
+
+
+        // ============================
+        // 7. COPA DA ÁRVORE
+        // ============================
+
+        ctx.fillStyle = "#228B22";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            175,
+            220,
+            90,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+
+        // ============================
+        // 8. TEXTO
+        // ============================
+
+        ctx.fillStyle = "white";
+
+        ctx.font = "bold 30px Arial";
+
+        ctx.fillText(
+            "Desenhado com JavaScript!",
+            230,
+            450
+        );
+
+    </script>
+
+</body>
+</html>

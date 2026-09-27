@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mini Paint - HTML CSS JavaScript</title>
+
+
+    <!-- =====================================================
+         CSS
+         APARÊNCIA DA APLICAÇÃO
+         ===================================================== -->
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e3a8a
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px;
+        }
+
+
+        /* =========================
+           ÁREA PRINCIPAL
+           ========================= */
+
+        .aplicacao {
+
+            width: 100%;
+
+            max-width: 1000px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.4);
+        }
+
+
+        /* =========================
+           CABEÇALHO
+           ========================= */
+
+        .cabecalho {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+
+        h1 {
+
+            margin: 0;
+
+            color: #111827;
+
+        }
+
+
+        #status {
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            background: #e5e7eb;
+
+            color: #374151;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           FERRAMENTAS
+           ========================= */
+
+        .ferramentas {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+
+            padding: 15px;
+
+            background: #f3f4f6;
+
+            border-radius: 12px;
+        }
+
+
+        button {
+
+            border: none;
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        button:hover {
+
+            transform: translateY(-2px);
+
+            filter: brightness(1.1);
+        }
+
+
+        button.ativo {
+
+            background: #111827;
+
+        }
+
+
+        input[type="color"] {
+
+            width: 45px;
+
+            height: 40px;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+
+        input[type="range"] {
+
+            cursor: pointer;
+
+        }
+
+
+        /* =========================
+           CANVAS
+           ========================= */
+
+        .area-canvas {
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 12px;
+
+            border: 3px solid #111827;
+
+            background: white;
+        }
+
+
+        canvas {
+
+            display: block;
+
+            width: 100%;
+
+            height: auto;
+
+            cursor: crosshair;
+        }
+
+
+        /* =========================
+           INFORMAÇÕES
+           ========================= */
+
+        .informacoes {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 15px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HTML
+         ESTRUTURA DA APLICAÇÃO
+         ===================================================== -->
+
+
+    <main class="aplicacao">
+
+
+        <!-- CABEÇALHO -->
+
+
+        <div class="cabecalho">
+
+            <h1>
+                🎨 Mini Paint
+            </h1>
+
+            <div id="status">
+                Passe o mouse sobre o desenho
+            </div>
+
+        </div>
+
+
+        <!-- FERRAMENTAS -->
+
+        <div class="ferramentas">
+
+
+            <!-- COR -->
+
+            <label>
+
+                Cor:
+
+                <input
+                    type="color"
+                    id="cor"
+                    value="#2563eb">
+
+            </label>
+
+
+            <!-- TAMANHO -->
+
+            <label>
+
+                Tamanho:
+
+                <input
+                    type="range"
+                    id="tamanho"
+                    min="1"
+                    max="50"
+                    value="5">
+
+            </label>
+
+
+            <!-- BOTÃO PINCEL -->
+
+            <button
+                id="botaoPincel"
+                class="ativo">
+
+                🖌️ Pincel
+
+            </button>
+
+
+            <!-- BOTÃO BORRACHA -->
+
+            <button
+                id="botaoBorracha">
+
+                🧹 Borracha
+
+            </button>
+
+
+            <!-- LIMPAR -->
+
+            <button
+                id="botaoLimpar">
+
+                🗑️ Limpar
+
+            </button>
+
+
+        </div>
+
+
+        <!-- ÁREA DO DESENHO -->
+
+        <div
+            class="area-canvas"
+            id="areaCanvas">
+
+            <canvas
+                id="canvas"
+                width="900"
+                height="500">
+            </canvas>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="informacoes">
+
+            <span id="coordenadas">
+                X: 0 | Y: 0
+            </span>
+
+            <span>
+                Segure o botão esquerdo do mouse para desenhar
+            </span>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         COMPORTAMENTO DA APLICAÇÃO
+         ===================================================== -->
+
+
+    <script>
+
+
+        // ==================================================
+        // 1. PEGAR ELEMENTOS DO HTML
+        // ==================================================
+
+
+        const canvas =
+            document.getElementById("canvas");
+
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        const areaCanvas =
+            document.getElementById("areaCanvas");
+
+
+        const status =
+            document.getElementById("status");
+
+
+        const coordenadas =
+            document.getElementById("coordenadas");
+
+
+        const cor =
+            document.getElementById("cor");
+
+
+        const tamanho =
+            document.getElementById("tamanho");
+
+
+        const botaoPincel =
+            document.getElementById("botaoPincel");
+
+
+        const botaoBorracha =
+            document.getElementById("botaoBorracha");
+
+
+        const botaoLimpar =
+            document.getElementById("botaoLimpar");
+
+
+
+        // ==================================================
+        // 2. VARIÁVEIS DO PROGRAMA
+        // ==================================================
+
+
+        let desenhando = false;
+
+
+        let ferramenta = "pincel";
+
+
+        let ultimaX = 0;
+
+
+        let ultimaY = 0;
+
+
+
+        // ==================================================
+        // 3. CONFIGURAÇÃO INICIAL
+        // ==================================================
+
+
+        ctx.lineCap = "round";
+
+        ctx.lineJoin = "round";
+
+
+
+        // ==================================================
+        // 4. MOUSEOVER
+        //
+        // O mouse entrou na área do desenho
+        // ==================================================
+
+
+        areaCanvas.addEventListener(
+            "mouseover",
+            function() {
+
+                status.textContent =
+                    "🎨 Mouse dentro do desenho";
+
+                status.style.background =
+                    "#dbeafe";
+
+                status.style.color =
+                    "#1d4ed8";
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 5. MOUSEOUT
+        //
+        // O mouse saiu da área
+        // ==================================================
+
+
+        areaCanvas.addEventListener(
+            "mouseout",
+            function() {
+
+                status.textContent =
+                    "👋 Mouse saiu do desenho";
+
+                status.style.background =
+                    "#e5e7eb";
+
+                status.style.color =
+                    "#374151";
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 6. MOUSEMOVE
+        //
+        // O mouse está se movimentando
+        // ==================================================
+
+
+        canvas.addEventListener(
+            "mousemove",
+            function(event) {
+
+
+                // Descobrir posição do mouse
+
+                const rect =
+                    canvas.getBoundingClientRect();
+
+
+                const x =
+                    (event.clientX - rect.left)
+                    * (canvas.width / rect.width);
+
+
+                const y =
+                    (event.clientY - rect.top)
+                    * (canvas.height / rect.height);
+
+
+                // Mostrar coordenadas
+
+                coordenadas.textContent =
+                    "X: " +
+                    Math.round(x) +
+                    " | Y: " +
+                    Math.round(y);
+
+
+                // Se não estiver desenhando,
+                // apenas mostramos a posição.
+
+                if (!desenhando) {
+
+                    return;
+
+                }
+
+
+                // Configurar tamanho
+
+                ctx.lineWidth =
+                    tamanho.value;
+
+
+                // Configurar cor
+
+                if (ferramenta === "pincel") {
+
+                    ctx.strokeStyle =
+                        cor.value;
+
+                }
+
+
+                // Borracha
+
+                if (ferramenta === "borracha") {
+
+                    ctx.strokeStyle =
+                        "white";
+
+                }
+
+
+                // Começar linha
+
+                ctx.beginPath();
+
+
+                ctx.moveTo(
+                    ultimaX,
+                    ultimaY
+                );
+
+
+                ctx.lineTo(
+                    x,
+                    y
+                );
+
+
+                ctx.stroke();
+
+
+                // Guardar posição
+
+                ultimaX = x;
+
+                ultimaY = y;
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 7. MOUSEDOWN
+        //
+        // Botão do mouse foi pressionado
+        // ==================================================
+
+
+        canvas.addEventListener(
+            "mousedown",
+            function(event) {
+
+
+                desenhando = true;
+
+
+                const rect =
+                    canvas.getBoundingClientRect();
+
+
+                ultimaX =
+                    (event.clientX - rect.left)
+                    * (canvas.width / rect.width);
+
+
+                ultimaY =
+                    (event.clientY - rect.top)
+                    * (canvas.height / rect.height);
+
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 8. MOUSEUP
+        //
+        // Botão do mouse foi solto
+        // ==================================================
+
+
+        canvas.addEventListener(
+            "mouseup",
+            function() {
+
+                desenhando = false;
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 9. MOUSELEAVE
+        //
+        // Mouse saiu enquanto estava desenhando
+        // ==================================================
+
+
+        canvas.addEventListener(
+            "mouseleave",
+            function() {
+
+                desenhando = false;
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 10. BOTÃO PINCEL
+        // ==================================================
+
+
+        botaoPincel.addEventListener(
+            "click",
+            function() {
+
+
+                ferramenta =
+                    "pincel";
+
+
+                botaoPincel.classList.add(
+                    "ativo"
+                );
+
+
+                botaoBorracha.classList.remove(
+                    "ativo"
+                );
+
+
+                status.textContent =
+                    "🖌️ Pincel selecionado";
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 11. BOTÃO BORRACHA
+        // ==================================================
+
+
+        botaoBorracha.addEventListener(
+            "click",
+            function() {
+
+
+                ferramenta =
+                    "borracha";
+
+
+                botaoBorracha.classList.add(
+                    "ativo"
+                );
+
+
+                botaoPincel.classList.remove(
+                    "ativo"
+                );
+
+
+                status.textContent =
+                    "🧹 Borracha selecionada";
+
+            }
+        );
+
+
+
+        // ==================================================
+        // 12. BOTÃO LIMPAR
+        // ==================================================
+
+
+        botaoLimpar.addEventListener(
+            "click",
+            function() {
+
+
+                ctx.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+
+                status.textContent =
+                    "🗑️ Desenho apagado";
+
+            }
+        );
+
+
+    </script>
+
+</body>
+
+</html>
