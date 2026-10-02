@@ -1,0 +1,448 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Galeria Experimental</title>
+
+    <style>
+
+        /* =========================
+           CONFIGURAÇÕES GERAIS
+           ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #171717;
+            color: white;
+        }
+
+
+        /* =========================
+           CABEÇALHO
+           ========================= */
+
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 40px;
+        }
+
+        header p {
+            color: #aaa;
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           QUADRO DA COLAGEM
+           ========================= */
+
+        .colagem {
+
+            width: 90%;
+            max-width: 1100px;
+
+            margin: 30px auto 80px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        /* =========================
+           CADA IMAGEM
+           ========================= */
+
+        .foto {
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 15px;
+
+            height: 250px;
+
+            cursor: pointer;
+
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
+
+        }
+
+
+        /* A imagem dentro do quadro */
+
+        .foto img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.5s ease,
+                filter 0.5s ease;
+
+        }
+
+
+        /* =========================
+           EFEITO AO PASSAR O MOUSE
+           ========================= */
+
+        .foto:hover {
+
+            transform: translateY(-10px) scale(1.03);
+
+            box-shadow:
+                0 20px 40px rgba(0,0,0,0.7);
+
+        }
+
+
+        .foto:hover img {
+
+            transform: scale(1.12);
+
+        }
+
+
+        /* =========================
+           EFEITOS INDIVIDUAIS
+           ========================= */
+
+
+        /* Foto 1 - Sépia */
+
+        .sepia:hover img {
+
+            filter: sepia(100%);
+
+        }
+
+
+        /* Foto 2 - Preto e branco */
+
+        .pb:hover img {
+
+            filter: grayscale(100%);
+
+        }
+
+
+        /* Foto 3 - Saturação */
+
+        .saturada:hover img {
+
+            filter: saturate(250%);
+
+        }
+
+
+        /* Foto 4 - Contraste */
+
+        .contraste:hover img {
+
+            filter: contrast(180%);
+
+        }
+
+
+        /* Foto 5 - Brilho */
+
+        .brilho:hover img {
+
+            filter: brightness(150%);
+
+        }
+
+
+        /* Foto 6 - Blur */
+
+        .blur:hover img {
+
+            filter: blur(3px);
+
+        }
+
+
+        /* =========================
+           TEXTO SOBRE A IMAGEM
+           ========================= */
+
+        .legenda {
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            padding: 20px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0,0,0,0.8)
+                );
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+            transition: 0.4s;
+
+        }
+
+
+        .foto:hover .legenda {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
+
+        .legenda h2 {
+
+            margin: 0;
+
+            font-size: 20px;
+
+        }
+
+
+        .legenda p {
+
+            margin: 5px 0 0;
+
+            color: #ddd;
+
+        }
+
+
+        /* =========================
+           RESPONSIVIDADE
+           ========================= */
+
+        @media (max-width: 700px) {
+
+            .colagem {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <header>
+
+        <h1>Galeria Experimental</h1>
+
+        <p>
+            Passe o mouse sobre as imagens
+            e observe os efeitos.
+        </p>
+
+    </header>
+
+
+    <main class="colagem">
+
+
+        <!-- IMAGEM 1 -->
+
+        <div class="foto sepia">
+
+            <img
+                src="https://picsum.photos/id/1015/600/400"
+                alt="Paisagem"
+            >
+
+            <div class="legenda">
+
+                <h2>Sépia</h2>
+
+                <p>Filtro sepia aplicado.</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGEM 2 -->
+
+        <div class="foto pb">
+
+            <img
+                src="https://picsum.photos/id/1025/600/400"
+                alt="Cachorro"
+            >
+
+            <div class="legenda">
+
+                <h2>Preto e Branco</h2>
+
+                <p>Filtro grayscale.</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGEM 3 -->
+
+        <div class="foto saturada">
+
+            <img
+                src="https://picsum.photos/id/1035/600/400"
+                alt="Montanhas"
+            >
+
+            <div class="legenda">
+
+                <h2>Saturação</h2>
+
+                <p>As cores ficam mais intensas.</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGEM 4 -->
+
+        <div class="foto contraste">
+
+            <img
+                src="https://picsum.photos/id/1043/600/400"
+                alt="Natureza"
+            >
+
+            <div class="legenda">
+
+                <h2>Contraste</h2>
+
+                <p>Contraste aumentado.</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGEM 5 -->
+
+        <div class="foto brilho">
+
+            <img
+                src="https://picsum.photos/id/1069/600/400"
+                alt="Paisagem"
+            >
+
+            <div class="legenda">
+
+                <h2>Brilho</h2>
+
+                <p>Imagem mais iluminada.</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- IMAGEM 6 -->
+
+        <div class="foto blur">
+
+            <img
+                src="https://picsum.photos/id/1074/600/400"
+                alt="Natureza"
+            >
+
+            <div class="legenda">
+
+                <h2>Blur</h2>
+
+                <p>Desfoque aplicado.</p>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           JAVASCRIPT
+           ========================= */
+
+        const fotos = document.querySelectorAll(".foto");
+
+
+        fotos.forEach(function(foto) {
+
+
+            /* Quando o mouse entra */
+
+            foto.addEventListener("mouseover", function() {
+
+                console.log("Mouse entrou na imagem!");
+
+            });
+
+
+            /* Quando o mouse sai */
+
+            foto.addEventListener("mouseout", function() {
+
+                console.log("Mouse saiu da imagem!");
+
+            });
+
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
+```
