@@ -1,0 +1,808 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HTML, CSS e JavaScript — Dois Lados</title>
+
+<style>
+
+/* =====================================================
+   CONFIGURAÇÃO GERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   LADO ESQUERDO — BONITO
+===================================================== */
+
+.lado-bonito {
+    width: 50%;
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff4a8,
+            #c9efff,
+            #ffd6e7
+        );
+
+    padding: 45px;
+
+    color: #3b3b3b;
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Pequenas bolhas decorativas */
+
+.bolha {
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.35);
+
+    animation: flutuar 6s infinite ease-in-out;
+}
+
+.bolha1 {
+    top: 10%;
+    left: 5%;
+}
+
+.bolha2 {
+    bottom: 15%;
+    right: 5%;
+
+    width: 150px;
+    height: 150px;
+
+    animation-delay: 2s;
+}
+
+@keyframes flutuar {
+
+    0%, 100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+
+}
+
+
+/* =====================================================
+   LADO DIREITO — TERROR
+===================================================== */
+
+.lado-terror {
+
+    width: 50%;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #392626,
+            #160d0d 45%,
+            #050505
+        );
+
+    color: #eee;
+
+    padding: 45px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   LAMA ESCORRENDO
+===================================================== */
+
+.lama {
+    position: absolute;
+
+    top: 0;
+
+    width: 80px;
+    height: 180px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #281313,
+            #090505
+        );
+
+    border-radius: 0 0 50% 50%;
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.8);
+
+    animation: escorrer 5s infinite ease-in-out;
+}
+
+.lama1 {
+    left: 8%;
+}
+
+.lama2 {
+    left: 35%;
+
+    height: 250px;
+
+    animation-delay: 1.5s;
+}
+
+.lama3 {
+    right: 8%;
+
+    height: 150px;
+
+    animation-delay: 3s;
+}
+
+@keyframes escorrer {
+
+    0%, 100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.25);
+    }
+
+}
+
+
+/* =====================================================
+   TÍTULOS
+===================================================== */
+
+h1 {
+
+    font-size: 42px;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    letter-spacing: 2px;
+}
+
+.lado-bonito h1 {
+    color: #6d75c9;
+}
+
+.lado-terror h1 {
+    color: #d94c4c;
+
+    text-shadow:
+        0 0 10px #5c0000;
+}
+
+
+/* =====================================================
+   CARTÕES
+===================================================== */
+
+.card {
+
+    background: rgba(255,255,255,0.65);
+
+    padding: 25px;
+
+    margin: 25px auto;
+
+    max-width: 600px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.12);
+
+    transition:
+        transform 0.3s,
+        filter 0.3s,
+        background 0.3s;
+}
+
+.lado-terror .card {
+
+    background: rgba(30,20,20,0.85);
+
+    border:
+        1px solid #542020;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.8);
+}
+
+
+/* =====================================================
+   EFEITO DO MOUSE
+===================================================== */
+
+.card:hover {
+
+    transform:
+        scale(1.05)
+        rotate(1deg);
+
+}
+
+.lado-terror .card:hover {
+
+    transform:
+        scale(1.07)
+        rotate(-1deg);
+
+    background: #321818;
+
+}
+
+
+/* =====================================================
+   DESTAQUES
+===================================================== */
+
+.codigo {
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+    background: rgba(0,0,0,0.08);
+
+    border-radius: 10px;
+
+    font-family: monospace;
+
+    color: #714b9b;
+}
+
+.lado-terror .codigo {
+
+    color: #ff7777;
+
+    background: #080404;
+
+}
+
+
+/* =====================================================
+   IMAGENS
+===================================================== */
+
+.imagem {
+
+    width: 100%;
+
+    max-width: 300px;
+
+    display: block;
+
+    margin: 15px auto;
+
+    border-radius: 15px;
+
+    transition:
+        filter 0.5s,
+        transform 0.5s;
+}
+
+
+/* Quando o mouse passa */
+
+.imagem:hover {
+
+    filter:
+        saturate(2)
+        contrast(1.2);
+
+    transform:
+        scale(1.08)
+        rotate(2deg);
+}
+
+
+/* Imagem do lado terror */
+
+.imagem-terror:hover {
+
+    filter:
+        grayscale(1)
+        contrast(1.7)
+        brightness(0.5);
+
+}
+
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+button {
+
+    display: block;
+
+    margin: 25px auto;
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #8d8ee8;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+
+    transform:
+        scale(1.1);
+
+    background: #5d5fc2;
+
+}
+
+
+/* Botão terror */
+
+.lado-terror button {
+
+    background: #721515;
+
+}
+
+.lado-terror button:hover {
+
+    background: #bd2424;
+
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .container {
+
+        flex-direction: column;
+
+    }
+
+    .lado-bonito,
+    .lado-terror {
+
+        width: 100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- ==================================================
+     LADO BONITO
+================================================== -->
+
+<section class="lado-bonito">
+
+<div class="bolha bolha1"></div>
+<div class="bolha bolha2"></div>
+
+
+<h1>🌸 O Lado Bonito da Web</h1>
+
+<p style="text-align:center;">
+HTML cria a estrutura.<br>
+CSS deixa tudo bonito.<br>
+JavaScript faz tudo interagir.
+</p>
+
+
+<!-- HTML -->
+
+<div class="card">
+
+<h2>🦴 HTML — O Esqueleto</h2>
+
+<p>
+HTML é como o <strong>esqueleto</strong>
+de uma página.
+</p>
+
+<p>
+Ele organiza os elementos que existirão
+dentro da página.
+</p>
+
+<div class="codigo">
+
+&lt;h1&gt;Título&lt;/h1&gt;<br>
+&lt;p&gt;Meu texto&lt;/p&gt;
+
+</div>
+
+</div>
+
+
+<!-- CSS -->
+
+<div class="card">
+
+<h2>🎨 CSS — A Aparência</h2>
+
+<p>
+CSS é responsável pela aparência.
+</p>
+
+<p>
+É como comparar uma pessoa:
+o HTML seria sua estrutura,
+enquanto o CSS cuidaria das
+<strong>cores, roupas, aparência e estilo.</strong>
+</p>
+
+<div class="codigo">
+
+color: pink;<br>
+font-size: 20px;<br>
+border-radius: 20px;
+
+</div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<div class="card">
+
+<h2>⚡ JavaScript — A Ação</h2>
+
+<p>
+JavaScript permite que a página
+<strong>reaja às ações do usuário.</strong>
+</p>
+
+<p>
+Por exemplo:
+quando o mouse passa sobre alguma coisa,
+podemos alterar cores, tamanho,
+imagens e filtros.
+</p>
+
+<div class="codigo">
+
+mouseover<br>
+mouseout<br>
+onclick
+
+</div>
+
+</div>
+
+
+<!-- TAGS -->
+
+<div class="card">
+
+<h2>🏷️ Algumas Tags</h2>
+
+<p>
+<strong>&lt;strong&gt;</strong>
+deixa o texto em negrito.
+</p>
+
+<p>
+<em>&lt;em&gt;</em>
+deixa o texto em itálico.
+</p>
+
+<p>
+&lt;br&gt; quebra a linha.
+</p>
+
+<p>
+&lt;p&gt;&lt;/p&gt;
+cria um parágrafo.
+</p>
+
+<p>
+&lt;img&gt;
+insere uma imagem.
+</p>
+
+</div>
+
+
+<!-- IMAGEM -->
+
+<div class="card">
+
+<h2>🖼️ &lt;img&gt;</h2>
+
+<p>
+A tag <strong>&lt;img&gt;</strong> é uma
+tag vazia: ela não precisa de
+uma tag de fechamento.
+</p>
+
+<img
+class="imagem"
+src="https://rounder.pics/assets/img/ui/square-image.webp"
+alt="Imagem de exemplo"
+>
+
+<p style="text-align:center;">
+Passe o mouse sobre a imagem!
+</p>
+
+</div>
+
+
+<button onclick="mensagemBonita()">
+Clique aqui
+</button>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     LADO TERROR
+================================================== -->
+
+<section class="lado-terror">
+
+
+<div class="lama lama1"></div>
+<div class="lama lama2"></div>
+<div class="lama lama3"></div>
+
+
+<h1>☠ O Lado Sombrio da Web</h1>
+
+<p style="text-align:center;">
+A mesma estrutura pode receber
+uma aparência completamente diferente.
+</p>
+
+
+<div class="card">
+
+<h2>💀 HTML continua sendo o esqueleto</h2>
+
+<p>
+Mesmo que a página fique assustadora,
+o HTML continua organizando tudo.
+</p>
+
+<div class="codigo">
+
+&lt;h1&gt;Terror&lt;/h1&gt;<br>
+&lt;p&gt;Algo está aqui...&lt;/p&gt;
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🩸 CSS pode transformar tudo</h2>
+
+<p>
+Com CSS podemos transformar uma
+estrutura simples em algo sombrio.
+</p>
+
+<div class="codigo">
+
+background: #050505;<br>
+color: #ff4444;<br>
+box-shadow: 0 0 20px black;
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>👁 JavaScript pode reagir</h2>
+
+<p>
+Passe o mouse sobre este cartão.
+</p>
+
+<p>
+O JavaScript pode perceber ações
+como <strong>mouseover</strong> e
+<strong>mouseout</strong>.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>🕷️ Tags também possuem funções</h2>
+
+<p>
+&lt;strong&gt; =
+<strong>negrito</strong>
+</p>
+
+<p>
+&lt;em&gt; =
+<em>itálico</em>
+</p>
+
+<p>
+&lt;br&gt; =
+quebra de linha
+</p>
+
+<p>
+&lt;p&gt; =
+parágrafo
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>👻 Uma imagem pode mudar</h2>
+
+<img
+class="imagem imagem-terror"
+src="https://thumbs.dreamstime.com/b/merle-border-collie-dog-azul-feliz-no-fundo-alaranjado-35136835.jpg"
+alt="Imagem de exemplo"
+>
+
+<p style="text-align:center;">
+Passe o mouse sobre ela...
+</p>
+
+</div>
+
+
+<button onclick="mensagemTerror()">
+Não clique...
+</button>
+
+
+</section>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   JAVASCRIPT
+===================================================== */
+
+
+/* Botão do lado bonito */
+
+function mensagemBonita() {
+
+    alert(
+        "🌸 Você acabou de executar JavaScript!"
+    );
+
+}
+
+
+/* Botão do lado terror */
+
+function mensagemTerror() {
+
+    alert(
+        "☠ Você clicou... JavaScript percebeu sua ação."
+    );
+
+}
+
+
+/* =====================================================
+   MOUSEOVER E MOUSEOUT
+===================================================== */
+
+const cards =
+document.querySelectorAll(".card");
+
+
+cards.forEach(function(card) {
+
+    card.addEventListener(
+        "mouseover",
+        function() {
+
+            card.style.transition =
+                "0.3s";
+
+        }
+    );
+
+
+    card.addEventListener(
+        "mouseout",
+        function() {
+
+            card.style.transition =
+                "0.3s";
+
+        }
+    );
+
+});
+
+</script>
+
+
+</body>
+
+</html>
+```
